@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <SizerItem />
+    <div class="h-screen bg-red">
+      <h1 class="text-3xl font-bold py-6">Awesome T-Shirt Sizer</h1>
+      <SizerItem />
+    </div>
   </div>
 </template>
 
@@ -23,6 +26,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
