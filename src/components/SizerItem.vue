@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="addNewName">
+    <form @submit.prevent="addNewTeamMember">
       <label for="name">Team Member </label>
       <input id="name" v-model.trim="name" />
     </form>
@@ -13,9 +13,9 @@
           <input v-model="item.hoursAvailable" id="hours" type="range" value="80" min="1" max="120">
           <output>{{ item.hoursAvailable }}</output>
 
-          <input type="button" v-for="size in sizes" v-bind:key="size.id" v-bind:value="size.name" @click="substractHours(index, size.value)">
+          <input type="button" v-for="size in sizes" v-bind:key="size.id" v-bind:value="size.name" @click="subtractHours(index, size.value); addHoursTag(index, size);">
 
-          <input type="button" v-for="size in item.chosenSizes" v-bind:key="size.id" v-bind:value="size.name">
+          <button type="button" v-for="(size, sizeIndex) in item.chosenSizes" v-bind:key="size.id" v-bind:value="size.name" @click="removeHoursTag(index, sizeIndex, size.value)">{{ size.name }} <span>X</span></button>
         </form>
       </li>
     </ul>
@@ -51,14 +51,14 @@ export default {
           value: 16
         },
         'xxl': {
-          name: 'xl',
+          name: 'xxl',
           value: 24
         }
       }
     }
   },
   methods: {
-    addNewName() {
+    addNewTeamMember() {
       this.teamMembers.push({
         name: this.name,
         hoursAvailable: 80,
@@ -66,8 +66,15 @@ export default {
       });
       this.name = '';
     },
-    substractHours(value, hours) {
-      this.teamMembers[value].hoursAvailable = this.teamMembers[value].hoursAvailable - hours;
+    subtractHours(index, hours) {
+      this.teamMembers[index].hoursAvailable = this.teamMembers[index].hoursAvailable - hours;
+    },
+    addHoursTag(index, value) {
+      this.teamMembers[index].chosenSizes.push(value);
+    },
+    removeHoursTag(index, sizeIndex, hours) {
+      this.teamMembers[index].hoursAvailable = this.teamMembers[index].hoursAvailable + hours;
+      this.teamMembers[index].chosenSizes.splice(sizeIndex, 1);
     }
   }
 }
