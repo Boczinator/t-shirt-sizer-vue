@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import './assets/css/tailwind.css';
 import SizerItem from './components/SizerItem.vue';
 
 export default {
