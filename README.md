@@ -1,4 +1,4 @@
-# untitled
+# T-Shirt Sizer Vue
 
 ## Project setup
 ```

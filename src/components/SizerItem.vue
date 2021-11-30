@@ -24,7 +24,7 @@
             </button>
           </div>
         </form>
-        <button @click="deleteTeamPlayer(index)" v-if="teamPlayers.length" class="uppercase bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded mx-2 my-8 cursor-pointer">Delete Player</button>
+        <button @click="deleteTeamPlayer(index)" v-if="teamPlayers.length" class="uppercase bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded mx-2 my-8 cursor-pointer">Delete Team Player</button>
       </li>
     </ul>
   </div>
