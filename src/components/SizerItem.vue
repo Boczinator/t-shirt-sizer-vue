@@ -81,7 +81,7 @@ export default {
       this.teamPlayers[index].chosenSizes.push(value);
     },
     removeHoursTag(index, sizeIndex, hours) {
-      this.teamPlayers[index].hoursAvailable = this.teamPlayers[index].hoursAvailable + hours;
+      this.teamPlayers[index].hoursAvailable = parseInt(this.teamPlayers[index].hoursAvailable) + parseInt(hours);
       this.teamPlayers[index].chosenSizes.splice(sizeIndex, 1);
     },
     deleteTeamPlayer(index) {
