@@ -2,7 +2,7 @@
   <div class="flex flex-wrap justify-center">
     <form class="w-full max-w-xl" @submit.prevent="addNewTeamPlayer">
       <div class="flex items-center border-b border-teal-500 py-2">
-        <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="name" placeholder="Team Player" v-model.trim="teamPlayer" />
+        <input class="z-100 appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" id="name" placeholder="Team Player" v-model.trim="teamPlayer" />
         <button @click="addNewTeamPlayer" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" type="button">
           Add
         </button>
@@ -10,8 +10,12 @@
     </form>
 
     <ul class="w-full flex flex-wrap">
-      <li class="px-9 py-10 w-full lg:w-1/3" v-bind:key="item.id" v-for="(item, index) in teamPlayers">
+      <li class="px-9 py-10 w-full lg:w-1/3 relative" v-bind:key="item.id" v-for="(item, index) in teamPlayers">
+        <img class="absolute top-1/2 transform -translate-y-1/2 w-full image" :src="require('@/assets/images/explosion-pow.gif')" />
         <form>
+          <div class="text-2xl font-bold flex-wrap flex justify-center">
+            <img class="h-36 w-36 rounded-full block mb-4 object-cover" :src="`./assets/images/teamplayer/${item.name.toLowerCase()}.png`" />
+          </div>
           <div class="text-2xl font-bold">{{ item.name }} ({{ item.hoursAvailable }} hours)</div>
           <input class="w-full h-1 bg-blue rounded outline-none slider-thumb" v-model="item.hoursAvailable" id="hours" type="range" value="80" min="1" max="120">
 
@@ -70,8 +74,13 @@ export default {
       this.teamPlayers.push({
         name: this.teamPlayer,
         hoursAvailable: 80,
-        chosenSizes: []
+        chosenSizes: [],
       });
+
+      setTimeout(() => {
+         [].slice.call(document.getElementsByClassName('image')).map(item => item.style.display = 'none');
+      }, 1200)
+
       this.teamPlayer = '';
     },
     subtractHours(index, hours) {
@@ -86,7 +95,16 @@ export default {
     },
     deleteTeamPlayer(index) {
       this.teamPlayers.splice(index, 1);
-    }
+    },
+  },
+  mounted() {
+    this.getStrombergQuote();
+  },
+  updated() {
+    [].slice.call(document.getElementsByTagName('img')).map(item => item.onerror = function () {
+      this.src = './assets/images/teamplayer/doggo.png'; // place your error.png image instead
+      console.log(this.src)
+    });
   }
 }
 </script>
