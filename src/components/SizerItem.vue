@@ -9,8 +9,8 @@
       </div>
     </form>
 
-    <ul class="w-full">
-      <li class="mx-9 my-10" v-bind:key="item.id" v-for="(item, index) in teamPlayers">
+    <ul class="w-full flex flex-wrap">
+      <li class="px-9 py-10 w-full lg:w-1/3" v-bind:key="item.id" v-for="(item, index) in teamPlayers">
         <form>
           <div class="text-2xl font-bold">{{ item.name }} ({{ item.hoursAvailable }} hours)</div>
           <input class="w-full h-1 bg-blue rounded outline-none slider-thumb" v-model="item.hoursAvailable" id="hours" type="range" value="80" min="1" max="120">
